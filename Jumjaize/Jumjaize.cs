@@ -140,7 +140,7 @@ namespace Jumjaize
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public string ToJumjaDirectly(string str)
+        public string ToJumjaWithoutRules(string str)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var ch in str)

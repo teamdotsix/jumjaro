@@ -21,9 +21,9 @@ namespace JumjaizeTest
         }
 
         [TestCase("한글 점자", "⠚⠣⠒⠈⠪⠂ ⠨⠎⠢⠨⠣")]
-        public void ToJumjaDirectly(string testStr, string expected)
+        public void ToJumjaWithoutRules(string testStr, string expected)
         {
-            Assert.AreEqual(expected, new Jumjaize.Jumjaize().ToJumjaDirectly(testStr));
+            Assert.AreEqual(expected, new Jumjaize.Jumjaize().ToJumjaWithoutRules(testStr));
         }
     }
 }

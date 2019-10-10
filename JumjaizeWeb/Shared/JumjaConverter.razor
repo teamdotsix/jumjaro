@@ -26,7 +26,7 @@
         await Task.Run(() =>
         {
             var jumjaize = new Jumjaize.Jumjaize();
-            jumjaResult = jumjaize.ToJumjaDirectly(inputText);
+            jumjaResult = jumjaize.ToJumjaWithoutRules(inputText);
         });
     }
 }
