@@ -9,7 +9,7 @@ namespace Jumjaize
         // NOTE: 변환의 편의를 위해 한글 초성, 중성, 종성의 순서와 맞춘다.
         // SEE: Hangul.cs
 
-        private static readonly string[] Onsets = 
+        private static readonly string[] Onsets =
         {
             /*
              * ㄱ(4), ㄴ(1-4), ㄷ(2-4), ㄹ(5), ㅁ(1-5), ㅂ(4-5), ㅅ(8), ㅇ(1-2-4-5), ㅈ(4-6), ㅊ(5-6), ㅋ(1-2-4), ㅌ(1-2-5), ㅍ(1-4-5), ㅎ(2-4-5)
@@ -31,7 +31,7 @@ namespace Jumjaize
             "6,4-6",   // ㅉ
             "5-6",     // ㅊ
             "1-2-4",   // ㅋ
-            "1-2-5",   // ㅌ 
+            "1-2-5",   // ㅌ
             "1-4-5",   // ㅍ
             "2-4-5",   // ㅎ
         };
