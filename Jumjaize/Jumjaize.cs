@@ -29,59 +29,59 @@ namespace Jumjaize
     {
         private readonly Hangul _hangul = new Hangul();
 
-        private readonly HangulSyllableBraille[] _onsets = 
+        private readonly HangulBraille[] _onsets = 
         {
             /*
              * ㄱ(4), ㄴ(1-4), ㄷ(2-4), ㄹ(5), ㅁ(1-5), ㅂ(4-5), ㅅ(8), ㅇ(1-2-4-5), ㅈ(4-6), ㅊ(5-6), ㅋ(1-2-4), ㅌ(1-2-5), ㅍ(1-4-5), ㅎ(2-4-5)
              * 된소리는 초성 앞에 된소리표(6)를 적는다.
              */
-            new HangulSyllableBraille("4"),       // ㄱ
-            new HangulSyllableBraille("6,8"),     // ㄲ
-            new HangulSyllableBraille("1-4"),     // ㄴ
-            new HangulSyllableBraille("2-4"),     // ㄷ
-            new HangulSyllableBraille("6,2-4"),   // ㄸ
-            new HangulSyllableBraille("5"),       // ㄹ
-            new HangulSyllableBraille("1-5"),     // ㅁ
-            new HangulSyllableBraille("4-5"),     // ㅂ
-            new HangulSyllableBraille("6,4-5"),   // ㅃ
-            new HangulSyllableBraille("8"),       // ㅅ
-            new HangulSyllableBraille("6,8"),     // ㅆ
-            new HangulSyllableBraille("1-2-4-5"), // ㅇ
-            new HangulSyllableBraille("4-6"),     // ㅈ
-            new HangulSyllableBraille("6,4-6"),   // ㅉ
-            new HangulSyllableBraille("5-6"),     // ㅊ
-            new HangulSyllableBraille("1-2-4"),   // ㅋ
-            new HangulSyllableBraille("1-2-5"),   // ㅌ 
-            new HangulSyllableBraille("1-4-5"),   // ㅍ
-            new HangulSyllableBraille("2-4-5"),   // ㅎ
+            new HangulBraille("4"),       // ㄱ
+            new HangulBraille("6,8"),     // ㄲ
+            new HangulBraille("1-4"),     // ㄴ
+            new HangulBraille("2-4"),     // ㄷ
+            new HangulBraille("6,2-4"),   // ㄸ
+            new HangulBraille("5"),       // ㄹ
+            new HangulBraille("1-5"),     // ㅁ
+            new HangulBraille("4-5"),     // ㅂ
+            new HangulBraille("6,4-5"),   // ㅃ
+            new HangulBraille("8"),       // ㅅ
+            new HangulBraille("6,8"),     // ㅆ
+            new HangulBraille("1-2-4-5"), // ㅇ
+            new HangulBraille("4-6"),     // ㅈ
+            new HangulBraille("6,4-6"),   // ㅉ
+            new HangulBraille("5-6"),     // ㅊ
+            new HangulBraille("1-2-4"),   // ㅋ
+            new HangulBraille("1-2-5"),   // ㅌ 
+            new HangulBraille("1-4-5"),   // ㅍ
+            new HangulBraille("2-4-5"),   // ㅎ
         };
 
-        private readonly HangulSyllableBraille[] _nucleuses =
+        private readonly HangulBraille[] _nucleuses =
         {
             /*
              * 모음 뒤에 '예'가 오거나 'ㅑ, ㅘ, ㅜ, ㅞ' 다음에 '애'가 이어 나오는 경우 그 사이에 (3-6)를 적는다. 단, 행이 바뀌는 경우에는 적지 않아도 된다.
              */
-            new HangulSyllableBraille("1-2-6"),            // 'ㅏ',
-            new HangulSyllableBraille("1-2-3-5"),          // 'ㅐ',
-            new HangulSyllableBraille("3-4-5"),            // 'ㅑ',
-            new HangulSyllableBraille("3-4-5,1-2-3-5"),    // 'ㅒ',
-            new HangulSyllableBraille("2-3-4"),            // 'ㅓ',
-            new HangulSyllableBraille("1-3-4-5"),          // 'ㅔ',
-            new HangulSyllableBraille("1-5-6"),            // 'ㅕ',
-            new HangulSyllableBraille("3-4"),              // 'ㅖ',
-            new HangulSyllableBraille("1-3-6"),            // 'ㅗ',
-            new HangulSyllableBraille("1-2-3-6"),          // 'ㅘ',
-            new HangulSyllableBraille("1-2-3-6,1-2-3-5"),  // 'ㅙ',
-            new HangulSyllableBraille("1-3-4-5-6"),        // 'ㅚ',
-            new HangulSyllableBraille("3-4-6"),            // 'ㅛ',
-            new HangulSyllableBraille("1-3-4"),            //'ㅜ',
-            new HangulSyllableBraille("1-2-3-4"),          //'ㅝ',
-            new HangulSyllableBraille("1-2-3-4,1-2-3-5"),  //'ㅞ',
-            new HangulSyllableBraille("1-3-4,1-2-3-5"),    //'ㅟ',
-            new HangulSyllableBraille("1-4-6"),            //'ㅠ',
-            new HangulSyllableBraille("2-4-6"),            //'ㅡ',
-            new HangulSyllableBraille("2-4-5-6"),          //'ㅢ',
-            new HangulSyllableBraille("1-3-5"),            //'ㅣ'
+            new HangulBraille("1-2-6"),            // 'ㅏ',
+            new HangulBraille("1-2-3-5"),          // 'ㅐ',
+            new HangulBraille("3-4-5"),            // 'ㅑ',
+            new HangulBraille("3-4-5,1-2-3-5"),    // 'ㅒ',
+            new HangulBraille("2-3-4"),            // 'ㅓ',
+            new HangulBraille("1-3-4-5"),          // 'ㅔ',
+            new HangulBraille("1-5-6"),            // 'ㅕ',
+            new HangulBraille("3-4"),              // 'ㅖ',
+            new HangulBraille("1-3-6"),            // 'ㅗ',
+            new HangulBraille("1-2-3-6"),          // 'ㅘ',
+            new HangulBraille("1-2-3-6,1-2-3-5"),  // 'ㅙ',
+            new HangulBraille("1-3-4-5-6"),        // 'ㅚ',
+            new HangulBraille("3-4-6"),            // 'ㅛ',
+            new HangulBraille("1-3-4"),            //'ㅜ',
+            new HangulBraille("1-2-3-4"),          //'ㅝ',
+            new HangulBraille("1-2-3-4,1-2-3-5"),  //'ㅞ',
+            new HangulBraille("1-3-4,1-2-3-5"),    //'ㅟ',
+            new HangulBraille("1-4-6"),            //'ㅠ',
+            new HangulBraille("2-4-6"),            //'ㅡ',
+            new HangulBraille("2-4-5-6"),          //'ㅢ',
+            new HangulBraille("1-3-5"),            //'ㅣ'
 
            // 모음  ㅏ          ㅑ          ㅓ         ㅕ          ㅗ         ㅛ       ㅜ           ㅠ         ㅡ        ㅣ         ㅐ        ㅔ
            // 점자 (1-2-6)    (3-4-5)    (2-3-4)    (1-5-6)    (1-3-6)    (3-4-6)    (1-3-4)    (1-4-6)    (2-4-6)    (1-3-5)    (1-2-3-5)  (1-3-4-5)
@@ -90,38 +90,38 @@ namespace Jumjaize
            // 점자   (3-4-5) (1-2-3-5)  |   (3-4) |  (1-2-3-6)  |  (1-2-3-6) (1-2-3-5) |  (1-3-4-5-6) |   (1-2-3-4) |  (1-2-3-4) (1-2-3-5) |  (1-3-4) (1-2-3-5)  |  (2-4-5-6)
         };
 
-        private readonly HangulSyllableBraille[] _codas =
+        private readonly HangulBraille[] _codas =
         {
             // 받침 'ㄲ'은 6점 점자 (1)6점 점자 (1)(1, 1), 받침 'ㅆ'은 6점 점자 (3-4)(3-4)로 적고, 나머지 겹받침은 해당하는 낱자를 순서대로 적는다.
             null,
 
-            new HangulSyllableBraille("1"), // ㄱ
-            new HangulSyllableBraille("1,1"), // ㄲ
-            new HangulSyllableBraille("1,3"), // ㄳ
-            new HangulSyllableBraille("2-5"), // ㄴ
-            new HangulSyllableBraille("2-5,1-3"), // ㄵ
-            new HangulSyllableBraille("2-5,3-5-6"), // ㄶ
-            new HangulSyllableBraille("3-5"), // ㄷ
-            new HangulSyllableBraille("2"), // ㄹ
-            new HangulSyllableBraille("2,1"), // ㄺ
-            new HangulSyllableBraille("2,2-6"), // ㄻ
-            new HangulSyllableBraille("2,1-2"), // ㄼ
-            new HangulSyllableBraille("2,3"), // ㄽ
-            new HangulSyllableBraille("2,2-3-6"), // ㄾ
-            new HangulSyllableBraille("2,2-5-6"), // ㄿ
-            new HangulSyllableBraille("2,3-5-6"), // ㅀ
-            new HangulSyllableBraille("2-6"), // ㅁ
-            new HangulSyllableBraille("1-2"), // ㅂ
-            new HangulSyllableBraille("1-2,3"), // ㅄ
-            new HangulSyllableBraille("3"), // ㅅ
-            new HangulSyllableBraille("3-4"), // ㅆ
-            new HangulSyllableBraille("2-3-5-6"), // ㅇ
-            new HangulSyllableBraille("1-3"), // ㅈ
-            new HangulSyllableBraille("2-3"), // ㅊ
-            new HangulSyllableBraille("2-3-5"), // ㅋ
-            new HangulSyllableBraille("2-3-6"), // ㅌ
-            new HangulSyllableBraille("2-5-6"), // ㅍ
-            new HangulSyllableBraille("3-5-6"), // ㅎ
+            new HangulBraille("1"), // ㄱ
+            new HangulBraille("1,1"), // ㄲ
+            new HangulBraille("1,3"), // ㄳ
+            new HangulBraille("2-5"), // ㄴ
+            new HangulBraille("2-5,1-3"), // ㄵ
+            new HangulBraille("2-5,3-5-6"), // ㄶ
+            new HangulBraille("3-5"), // ㄷ
+            new HangulBraille("2"), // ㄹ
+            new HangulBraille("2,1"), // ㄺ
+            new HangulBraille("2,2-6"), // ㄻ
+            new HangulBraille("2,1-2"), // ㄼ
+            new HangulBraille("2,3"), // ㄽ
+            new HangulBraille("2,2-3-6"), // ㄾ
+            new HangulBraille("2,2-5-6"), // ㄿ
+            new HangulBraille("2,3-5-6"), // ㅀ
+            new HangulBraille("2-6"), // ㅁ
+            new HangulBraille("1-2"), // ㅂ
+            new HangulBraille("1-2,3"), // ㅄ
+            new HangulBraille("3"), // ㅅ
+            new HangulBraille("3-4"), // ㅆ
+            new HangulBraille("2-3-5-6"), // ㅇ
+            new HangulBraille("1-3"), // ㅈ
+            new HangulBraille("2-3"), // ㅊ
+            new HangulBraille("2-3-5"), // ㅋ
+            new HangulBraille("2-3-6"), // ㅌ
+            new HangulBraille("2-5-6"), // ㅍ
+            new HangulBraille("3-5-6"), // ㅎ
 
             // 자음	ㄱ	ㄴ          	ㄷ 	 ㄹ   	ㅁ	      ㅂ	 ㅅ     	ㅇ	      ㅈ	 ㅊ     	ㅋ	      ㅌ	      ㅍ      	ㅎ
             // 종성	 (1)	 (2-5)	 (3-5)	 (2)	 (2-6)	 (1-2)	 (3)	 (2-3-5-6)	 (1-3)	 (2-3)	 (2-3-5)	 (2-3-6)	 (2-5-6)	 (3-5-6)

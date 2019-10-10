@@ -7,12 +7,11 @@ using System.Threading;
 
 namespace Jumjaize
 {
-    public class HangulSyllableBraille
+    public class HangulBraille
     {
-        private const int EMPTY_BRAILLE = -1;
-        private List<Braille> _brailles;
+        private readonly List<Braille> _brailles;
 
-        public HangulSyllableBraille(string multipleIndexNotation)
+        public HangulBraille(string multipleIndexNotation)
         {
             _brailles = Braille.CreateBraillesFromMultipleIndexNotation(multipleIndexNotation);
         }
