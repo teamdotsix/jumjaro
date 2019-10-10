@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Jumjaize
 {
     public class Braille
     {
-        private int _index;
+        private readonly int _index;
+
         public Braille(int index)
         {
             _index = index;
@@ -33,6 +35,17 @@ namespace Jumjaize
         public override string ToString()
         {
             return char.ConvertFromUtf32(0x2800 + _index);
+        }
+
+        public static List<Braille> CreateBraillesFromMultipleIndexNotation(string multipleIndexNotation)
+        {
+            var notations = multipleIndexNotation.Split(new char[] { ',' });
+            if (notations.Length == 0)
+            {
+                return null;
+            }
+
+            return notations.Select(notation => new Braille(notation)).ToList();
         }
     }
 }

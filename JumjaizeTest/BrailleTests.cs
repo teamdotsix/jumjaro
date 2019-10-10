@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using NUnit.Framework;
 using Jumjaize;
 
@@ -15,6 +14,14 @@ namespace JumjaizeTest
         public void ConvertIndexNotation(string notation, int expectedValue)
         {
             Assert.AreEqual(expectedValue, Braille.ConvertIndexNotationToInt(notation));
+        }
+
+        [TestCase("4-6,1-3-5,1", "⠨⠕⠁")]
+        public void CreateBrailes(string notation, string expected)
+        {
+            string brailles = string.Join(string.Empty,
+                Braille.CreateBraillesFromMultipleIndexNotation(notation).Select(x => x.ToString()));
+            Assert.AreEqual(expected, brailles);
         }
     }
 }

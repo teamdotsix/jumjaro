@@ -10,15 +10,11 @@ namespace Jumjaize
     public class HangulSyllableBraille
     {
         private const int EMPTY_BRAILLE = -1;
-        private List<Braille> _brailles = new List<Braille>();
+        private List<Braille> _brailles;
 
         public HangulSyllableBraille(string multipleIndexNotation)
         {
-            var notations = multipleIndexNotation.Split(new char[] { ',' }, 2);
-            foreach (var notation in notations)
-            {
-                _brailles.Add(new Braille(notation));
-            }
+            _brailles = Braille.CreateBraillesFromMultipleIndexNotation(multipleIndexNotation);
         }
 
         public override string ToString()
