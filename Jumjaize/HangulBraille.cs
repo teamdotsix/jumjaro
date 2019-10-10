@@ -123,7 +123,11 @@ namespace Jumjaize
             var brailleNotations = new List<string>();
             if (_onset != default(char))
             {
-                brailleNotations.Add(Onsets[hangul.FindIndexOfOnset(_onset)]);
+                // 점자에서는 음가 없는 첫소리 ‘ㅇ’을 표기하지 않고, 이것을 약자가 아니라 정자로 삼는다.
+                if (_onset != 'ㅇ')
+                {
+                    brailleNotations.Add(Onsets[hangul.FindIndexOfOnset(_onset)]);
+                }
             }
             if (_nucleus != default(char))
             {
