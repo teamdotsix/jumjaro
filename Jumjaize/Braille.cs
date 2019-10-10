@@ -29,16 +29,22 @@ namespace Jumjaize
 
     public class Braille
     {
-        private readonly int _index;
+        private readonly string _braille;
 
         public Braille(int index)
         {
-            _index = index;
+            _braille = char.ConvertFromUtf32(0x2800 + index);
         }
 
-        public Braille(string indexNotation)
+        public Braille(char unicodeBraille)
         {
-            _index = ConvertIndexNotationToInt(indexNotation);
+            _braille = unicodeBraille.ToString();
+        }
+
+        public static Braille CreateFromIndexNotation(string indexNotation)
+        {
+            var index = ConvertIndexNotationToInt(indexNotation);
+            return new Braille(index);
         }
 
         public static int ConvertIndexNotationToInt(string indexNotation)
@@ -56,7 +62,7 @@ namespace Jumjaize
 
         public override string ToString()
         {
-            return char.ConvertFromUtf32(0x2800 + _index);
+            return _braille;
         }
 
         public static List<Braille> CreateBraillesFromMultipleIndexNotation(string multipleIndexNotation)
@@ -67,7 +73,13 @@ namespace Jumjaize
                 return null;
             }
 
-            return notations.Select(notation => new Braille(notation)).ToList();
+            return notations.Select(CreateFromIndexNotation).ToList();
+        }
+
+        public static List<Braille> CreateBrailesFromBrailleASCIICode(string brailleASCIICode)
+        {
+            var brailleString = BrailleASCII.ToUnicode(brailleASCIICode);
+            return brailleString.Select(x => new Braille(x)).ToList();
         }
     }
 }
