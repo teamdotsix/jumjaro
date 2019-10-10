@@ -34,7 +34,7 @@ namespace JumjaizeTest
         [TestCase("소뼈", "6,1-3-6,6,4-5,1-5-6")]
         [TestCase("쓰기", "6,6,2-4-6,4,1-3-5")]
         [TestCase("찌개", "6,4-6,1-3-5,4,1-2-3-5")]
-        public void JamoTest(string testStr, string expectedIndexNotation)
+        public void JamoRuleTest(string testStr, string expectedIndexNotation)
         {
             ToJumjaTestWithIndexNotaion(testStr, expectedIndexNotation);
         }
