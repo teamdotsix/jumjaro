@@ -30,6 +30,10 @@ namespace JumjaizeTest
         [TestCase("여우", "1-5-6,1-3-4")]
         [TestCase("용", "3-4-6,2-3-5-6")]
         [TestCase("우거지", "1-3-4,4,2-3-4,4-6,1-3-5")]
+        [TestCase("솥뚜껑", "6,1-3-6,2-3-6,6,2-4,1-3-4,6,4,2-3-4,2-3-5-6")]
+        [TestCase("소뼈", "6,1-3-6,6,4-5,1-5-6")]
+        [TestCase("쓰기", "6,6,2-4-6,4,1-3-5")]
+        [TestCase("찌개", "6,4-6,1-3-5,4,1-2-3-5")]
         public void JamoTest(string testStr, string expectedIndexNotation)
         {
             ToJumjaTestWithIndexNotaion(testStr, expectedIndexNotation);
