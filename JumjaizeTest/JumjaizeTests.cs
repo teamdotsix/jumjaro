@@ -39,6 +39,39 @@ namespace JumjaizeTest
             ToJumjaTestWithIndexNotaion(testStr, expectedIndexNotation);
         }
 
+        [TestCase("직", ".OA")]
+        public void ToJumjaTestWithBrailleASCII(string testStr, string expectedBrailleASCII)
+        {
+            string expected = string.Join(string.Empty, Braille.CreateBrailesFromBrailleASCIICode(expectedBrailleASCII).Select(x => x.ToString()));
+            string actual = new Jumjaize.Jumjaize().ToJumja(testStr);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("국어", "@mas")]
+        [TestCase("롤러", "\"u1\"s")]
+        [TestCase("법률", "^sb\"%1")]
+        [TestCase("버섯", "^s,s'")]
+        [TestCase("젖다", ".ski")]
+        [TestCase("꽃", ",@u2")]
+        public void CodaRuleTest(string testStr, string expectedBrailleASCII)
+        {
+            ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
+        }
+
+        [TestCase(",,[@o", "⠠⠠⠪⠈⠕")]
+        public void BrailleASCIItoBrailleUnicodeTest(string testStr, string expected)
+        {
+            var actual = Jumjaize.BrailleASCII.ToUnicode(testStr);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("⠠⠠⠪⠈⠕", ",,[@O")]
+        public void BrailleUnicodetoBrailleASCIITest(string testStr, string expected)
+        {
+            var actual = Jumjaize.BrailleASCII.FromUnicode(testStr);
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestCase("한글 점자", "⠚⠣⠒⠈⠪⠂ ⠨⠎⠢⠨⠣")]
         [TestCase("아이", "⠛⠣⠛⠕")]
         public void ToJumjaWithoutRules(string testStr, string expected)

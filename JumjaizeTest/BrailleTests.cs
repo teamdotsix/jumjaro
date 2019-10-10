@@ -23,5 +23,13 @@ namespace JumjaizeTest
                 Braille.CreateBraillesFromMultipleIndexNotation(notation).Select(x => x.ToString()));
             Assert.AreEqual(expected, brailles);
         }
+
+        [TestCase(",,[@o", "⠠⠠⠪⠈⠕")]
+        public void CreateBraillesFromASCII(string brailASCII, string expected)
+        {
+            var actual = string.Join(string.Empty,
+                Braille.CreateBrailesFromBrailleASCIICode(brailASCII).Select(x => x.ToString()));
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
