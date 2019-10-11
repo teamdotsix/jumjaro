@@ -8,8 +8,7 @@ pages:
     - pushd JumjaizeWeb
     - dotnet publish -c Release -o ../publish
     - popd
-    - mkdir -p public
-    - mv publish/JumjaizeWeb/dist public/
+    - mv publish/JumjaizeWeb/dist public
   artifacts:
     paths:
       - public
