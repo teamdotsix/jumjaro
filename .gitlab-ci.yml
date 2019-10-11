@@ -1,0 +1,17 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.0
+
+before_script:
+  - dotnet new -i "Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview9.19465.2"
+
+pages:
+  script:
+    - pushd JumjaizeWeb
+    - dotnet publish -c Release -o ../publish
+    - popd
+    - mkdir -p public
+    - mv publish/JumjaizeWeb/dist public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
