@@ -138,7 +138,7 @@ namespace JumjaizeTest
         [TestCase("우그리고", "m@[\"o@u")]
         [TestCase("오그리고", "u@[\"o@u")]
         [TestCase("찡그리고", ",.o7@[\"o@u")]
-        public void AcronymsRuleTest(string testStr, string expectedBrailleASCII)
+        public void AcronymRuleTest(string testStr, string expectedBrailleASCII)
         {
             ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
         }
