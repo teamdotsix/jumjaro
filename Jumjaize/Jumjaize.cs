@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Jumjaize
@@ -88,13 +89,19 @@ namespace Jumjaize
         {
             // NOTE: 약어에 대한 규칙은 Jumja 클래스가 담당하고, 글자에 대한 규칙은 위임한다.
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var word in str.Split(new char[] { ' ' }))
-            {
-                sb.Append(ConvertAsWord(str));
-            }
+            var words = new List<string>();
 
-            return sb.ToString();
+            foreach(var word in str.Split(new char[] {' '}))
+            {
+                if(word.Contains('\n'))
+                {
+                    var lines = word.Split('\n').Select(ConvertAsWord).ToList();
+                    words.Add(string.Join("\n", lines));
+                    continue;
+                }
+                words.Add(ConvertAsWord(word));
+            }
+            return string.Join(" ", words);
         }
 
         /// <summary>
