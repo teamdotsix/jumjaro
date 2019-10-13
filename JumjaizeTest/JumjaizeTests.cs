@@ -35,8 +35,6 @@ namespace JumjaizeTest
         [TestCase("소뼈", "6,1-3-6,6,4-5,1-5-6")]
         [TestCase("쓰기", "6,6,2-4-6,4,1-3-5")]
         [TestCase("찌개", "6,4-6,1-3-5,4,1-2-3-5")]
-        // 숫자테스트 임의로 추가함
-        [TestCase("1", "3-4-5-6,1")]
         public void OnsetRuleTest(string testStr, string expectedIndexNotation)
         {
             ToJumjaTestWithIndexNotaion(testStr, expectedIndexNotation);
@@ -170,6 +168,62 @@ namespace JumjaizeTest
         public void ToJumjaWithoutRules(string testStr, string expected)
         {
             Assert.AreEqual(expected, new Jumjaize.Jumjaize().ToJumjaWithoutRules(testStr));
+        }
+
+        // 아래 테스트는 "제5장 숫자 제11절 국어 문장 안의 숫자"에서 가져왔다
+        // 숫자는 수표(3-4-5-6)를 앞세워 적는다
+        [TestCase("0", "#j")]
+        [TestCase("1", "#a")]
+        [TestCase("2", "#b")]
+        [TestCase("3", "#c")]
+        [TestCase("4", "#d")]
+        [TestCase("5", "#e")]
+        [TestCase("6", "#f")]
+        [TestCase("7", "#g")]
+        [TestCase("8", "#h")]
+        [TestCase("9", "#i")]
+        [TestCase("10", "#aj")]
+        [TestCase("23", "#bc")]
+        [TestCase("45", "#de")]
+        [TestCase("77", "#gg")]
+        [TestCase("86", "#hf")]
+        [TestCase("100", "#ajj")]
+        [TestCase("120", "#abj")]
+        [TestCase("375", "#cge")]
+        [TestCase("555", "#eee")]
+        [TestCase("999", "#iii")]
+        // 두 숫자 사이에 빈칸이 있을 경우 수표의 효력이 정지되므로 수표를 다시 적어 준다
+        [TestCase("123 4567", "#abc #defg")]
+        public void NumberRuleTest(string testStr, string expectedBrailleASCII)
+        {
+            ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
+        }
+
+        [TestCase("1가", "#a$")]
+        [TestCase("2권", "#b@p3")]
+        [TestCase("3반", "#c^3")]
+        [TestCase("4선", "#d,)")]
+
+        [TestCase("5월", "#ep1")]
+        [TestCase("6일", "#fo1")]
+        [TestCase("7자루", "#g.\"m")]
+        [TestCase("8꾸러미", "#h,@m\"seo")]
+
+        [TestCase("1평은 3.3㎡이다.", "#a d]z #c4c0m^#boi4")]
+
+        //숫자와 혼동되는 ‘ㄴ, ㄷ, ㅁ, ㅋ, ㅌ, ㅍ, ㅎ’의 첫소리 글자와 ‘운’의 약자가 숫자 다음에 이어 나올 때에는 숫자와 한글을 띄어 쓴다.
+        [TestCase("1년", "#a c*")]
+        [TestCase("2도", "#b iu")]
+        [TestCase("3명", "#c e]")]
+        [TestCase("4칸", "#d f3")]
+        [TestCase("5톤", "#e h(")]
+        [TestCase("6평", "#f d]")]
+        [TestCase("7항", "#g j7")]
+        [TestCase("5운6기", "#e g#f@o")]
+        [TestCase("79㎡형", "#gi0m^#b j]")]
+        public void NumberWithStringRuleTest(string testStr, string expectedBrailleASCII)
+        {
+            ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
         }
     }
 }
