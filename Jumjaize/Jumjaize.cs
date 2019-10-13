@@ -8,6 +8,7 @@ namespace Jumjaize
     public class Jumjaize
     {
         private readonly Hangul _hangul = new Hangul();
+        private CharacterMode _characterMode = CharacterMode.None;
 
         private readonly Dictionary<string, string> _acronyms = new Dictionary<string, string>()
         {
@@ -20,17 +21,42 @@ namespace Jumjaize
             {"그리하여", "⠁⠱"},
         };
 
+        // 문자 모드를 변경하고, 필요한 경우 모드 관련 문자를 추가한다
+        private void ChangeMode(CharacterMode mode, StringBuilder sb)
+        {
+            if (_characterMode == mode)
+            {
+                return;
+            }
+
+            var prevMode = _characterMode;
+            _characterMode = mode;
+
+            if (_characterMode == CharacterMode.Number)
+            {
+                sb.Append('⠼');
+            }
+        }
+
         private string ConvertAsChar(string str)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var ch in str)
             {
-                if (!_hangul.IsHangulCharacter(ch))
+                if (_hangul.IsHangulCharacter(ch))
+                {
+                    ChangeMode(CharacterMode.Hangul, sb);
+                    sb.Append(new HangulBraille(ch).ToString());
+                }
+                else if (char.IsNumber(ch))
+                {
+                    ChangeMode(CharacterMode.Number, sb);
+                    sb.Append(new NumberArithmeticBraille(ch).ToString());
+                }
+                else
                 {
                     sb.Append(ch);
-                    continue;
                 }
-                sb.Append(new HangulBraille(ch).ToString());
             }
 
             return sb.ToString();
@@ -42,7 +68,7 @@ namespace Jumjaize
             // TODO: 최적화 여지가 있음
             foreach (var acronym in _acronyms)
             {
-                if(str.StartsWith(acronym.Key))
+                if (str.StartsWith(acronym.Key))
                 {
                     sb.Append(acronym.Value);
                     str = str.Substring(acronym.Key.Length);
@@ -50,7 +76,7 @@ namespace Jumjaize
                 }
             }
 
-            if(!string.IsNullOrEmpty(str))
+            if (!string.IsNullOrEmpty(str))
             {
                 sb.Append(ConvertAsChar(str));
             }
@@ -63,7 +89,7 @@ namespace Jumjaize
             // NOTE: 약어에 대한 규칙은 Jumja 클래스가 담당하고, 글자에 대한 규칙은 위임한다.
 
             StringBuilder sb = new StringBuilder();
-            foreach (var word in str.Split(new char[] {' '}))
+            foreach (var word in str.Split(new char[] { ' ' }))
             {
                 sb.Append(ConvertAsWord(str));
             }
@@ -81,13 +107,20 @@ namespace Jumjaize
             StringBuilder sb = new StringBuilder();
             foreach (var ch in str)
             {
-                if (!_hangul.IsHangulCharacter(ch))
+                if (_hangul.IsHangulCharacter(ch))
+                {
+                    ChangeMode(CharacterMode.Hangul, sb);
+                    sb.Append(new HangulBraille(ch).ToStringWithoutRules());
+                }
+                else if (char.IsNumber(ch))
+                {
+                    ChangeMode(CharacterMode.Number, sb);
+                    sb.Append(new NumberArithmeticBraille(ch).ToStringWithoutRules());
+                }
+                else
                 {
                     sb.Append(ch);
-                    continue;
                 }
-
-                sb.Append(new HangulBraille(ch).ToStringWithoutRules());
             }
             return sb.ToString();
         }
