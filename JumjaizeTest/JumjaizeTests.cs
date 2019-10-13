@@ -119,6 +119,28 @@ namespace JumjaizeTest
             ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
         }
 
+        // 아래 테스트는 "제1장 제7절, 약어"에서 가져옴
+        [TestCase("그래서", "as")]
+        [TestCase("그러나", "ac")]
+        [TestCase("그러면", "a3")]
+        [TestCase("그러므로", "a5")]
+        [TestCase("그런데", "an")]
+        [TestCase("그리고", "au")]
+        [TestCase("그리하여", "a:")]
+        [TestCase("그림을 그리고 있다.", "@[\"o5! au o/i4")]
+        [TestCase("그래서인지", "asq.o")]
+        [TestCase("그러면서", "a3,s")]
+        [TestCase("그런데도", "aniu")]
+        [TestCase("그리하여도", "a:iu")]
+        [TestCase("쭈그리고", ",.m@[\"o@u")]
+        [TestCase("우그리고", "m@[\"o@u")]
+        [TestCase("오그리고", "u@[\"o@u")]
+        [TestCase("찡그리고", ",.o7@[\"o@u")]
+        public void AcronymsRuleTest(string testStr, string expectedBrailleASCII)
+        {
+            ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
+        }
+
         [TestCase(",,[@o", "⠠⠠⠪⠈⠕")]
         public void BrailleASCIItoBrailleUnicodeTest(string testStr, string expected)
         {
