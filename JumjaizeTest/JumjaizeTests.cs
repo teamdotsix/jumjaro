@@ -20,6 +20,7 @@ namespace JumjaizeTest
             Assert.AreEqual(expected, actual);
         }
 
+        // 아래 테스트는 "제1장 제1절, 첫소리 자리에 쓰인 자음자"에서 가져옴
         [TestCase("아이", "1-2-6,1-3-5")]
         [TestCase("우유", "1-3-4,1-4-6")]
         [TestCase("중앙", "4-6,1-3-4,2-3-5-6,1-2-6,2-3-5-6")]
@@ -47,13 +48,73 @@ namespace JumjaizeTest
             Assert.AreEqual(expected, actual);
         }
 
+        // 아래 테스트는 "제1장 제2절, 받침으로 쓰인 자음자"에서 가져옴
         [TestCase("국어", "@mas")]
         [TestCase("롤러", "\"u1\"s")]
         [TestCase("법률", "^sb\"%1")]
         [TestCase("버섯", "^s,s'")]
         [TestCase("젖다", ".ski")]
         [TestCase("꽃", ",@u2")]
+        [TestCase("난중일기", "c3.m7o1@o")]
+        [TestCase("딛다", "io9i")]
+        [TestCase("멈추다", "es5;mi")]
+        [TestCase("포용","du+7")]
+        [TestCase("북녘", "^mac:6")]
+        [TestCase("밥솥", "^b,u8")]
+        [TestCase("앞자리", "<4.\"o")]
+        [TestCase("좋다", ".u0i")]
+        [TestCase("일자 형태의 부엌!", "o1. j]hrw ^ms66")]
+        [TestCase("낚시", "caa,o")]
+        [TestCase("있다", "o/i")]
+        [TestCase("안팎", "<3daa")]
+        [TestCase("보았다", "^u</i")]
+        [TestCase("깎았다", ",$aa</i")]
+        [TestCase("엮었다", ":aas/i")]
+        [TestCase("무예", "em-/")]
+        [TestCase("이지예", "o.o-/")]
+        [TestCase("삯", "la'")]
+        [TestCase("앉다", "<3ki")]
+        [TestCase("않다", "<30i")]
+        [TestCase("읽다", "o1ai")]
+        [TestCase("옮기다", "u15@oi")]
+        [TestCase("밟다", "^1bi")]
+        [TestCase("외곬", "y@u1'")]
+        [TestCase("핥다", "j18i")]
+        [TestCase("읊다", "!4i")]
+        [TestCase("옳다", "u10i")]
+        [TestCase("없다", "sb'i")]
+        [TestCase("품삯", "dm5la'")]
+        [TestCase("앉은 자리", "<3kz .\"o")]
+        [TestCase("많이", "e30o")]
+        [TestCase("칡차", ";o1a;<")]
+        [TestCase("옮김", "u15@o5")]
+        [TestCase("얇다", ">1bi")]
+        [TestCase("옰", "u1'")]
+        [TestCase("개미핥기", "@reoj18@o")]
+        [TestCase("앒", "<14")]
+        [TestCase("싫증", ",o10.[7")]
+        [TestCase("책값", ";ra$b'")]
+        [TestCase("몫", "ex'")]
+        [TestCase("얽매이다", "taeroi")]
+        [TestCase("읊조리다", "!4.u\"oi")]
         public void CodaRuleTest(string testStr, string expectedBrailleASCII)
+        {
+            ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
+        }
+
+        // 아래 테스트는 "제1장 제3절, 모음자"에서 가져옴
+        [TestCase("새우", ",rm")]
+        [TestCase("얘기", ">r@o")]
+        [TestCase("게으름", "@n[\"[5")]
+        [TestCase("예약", "/>a")]
+        [TestCase("관람", "@v3\"<5")]
+        [TestCase("쇄국", ",vr@ma")]
+        [TestCase("쇠고기", ",y@u@o")]
+        [TestCase("권리", "@p3\"o")]
+        [TestCase("스웨터", ",[prhs")]
+        [TestCase("취소", ";mr,u")]
+        [TestCase("의식", "w,oa")]
+        public void NucleusRuleTest(string testStr, string expectedBrailleASCII)
         {
             ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
         }
