@@ -66,5 +66,10 @@ namespace Jumjaize
             }
             return syllables;
         }
+
+        public char JoinSyllables(char onset, char nucleus, char coda = default)
+        {
+            return (char)((Array.IndexOf(_onsets, onset) * _nucleuses.Length + Array.IndexOf(_nucleuses, nucleus)) * _codas.Length + Array.IndexOf(_codas, coda) + '가');
+        }
     }
 }

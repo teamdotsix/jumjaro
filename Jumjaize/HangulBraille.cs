@@ -98,9 +98,59 @@ namespace Jumjaize
             "⠴",    // ㅎ
         };
 
+        private readonly char _letter;
         private readonly char _onset;
         private readonly char _nucleus;
         private readonly char _coda;
+
+        private static readonly Dictionary<HangulMask, string> Abbreviations = new Dictionary<HangulMask, string>()
+        {
+            // 제12항. 다음 글자가 포함된 글자들은 아래 표에 제시한 약자 표기를 이용하여 적는 것을 표준으로 삼는다.
+            {new HangulMask('ㄱ', 'ㅏ'), "⠫"},
+            {new HangulMask('ㄴ', 'ㅏ'), "⠉"},
+            {new HangulMask('ㄷ', 'ㅏ'), "⠊"},
+            {new HangulMask('ㅁ', 'ㅏ'), "⠑"},
+            {new HangulMask('ㅂ', 'ㅏ'), "⠘"},
+            {new HangulMask('ㅅ', 'ㅏ'), "⠇"},
+            {new HangulMask('ㅈ', 'ㅏ'), "⠨"},
+            {new HangulMask('ㅋ', 'ㅏ'), "⠋"},
+            {new HangulMask('ㅌ', 'ㅏ'), "⠓"},
+            {new HangulMask('ㅍ', 'ㅏ'), "⠙"},
+            {new HangulMask('ㅎ', 'ㅏ'), "⠚"},
+            {new HangulMask('ㄱ', 'ㅓ', 'ㅅ'), "⠸⠎"},
+
+            // 제14항. ‘까, 싸, 껏’은 각각 ‘가, 사, 것’의 약자 표기에 된소리 표를 덧붙여 적는다.
+            {new HangulMask('ㄲ', 'ㅏ'), "⠠⠫"},
+            {new HangulMask('ㅆ', 'ㅏ'), "⠠⠇"},
+            {new HangulMask('ㄲ', 'ㅓ', 'ㅅ'), "⠠⠸⠎"},
+
+            // 제16항:‘성, 썽, 정, 쩡, 청’은 ‘ㅅ, ㅆ, ㅈ, ㅉ, ㅊ’ 다음에 ‘ㅕㅇ’의 약자(1-2-4-5-6)를 적어 나타낸다
+            {new HangulMask('ㅅ', 'ㅓ', 'ㅇ'), "⠠⠻"},
+            {new HangulMask('ㅆ', 'ㅓ', 'ㅇ'), "⠠⠠⠻"},
+            {new HangulMask('ㅈ', 'ㅓ', 'ㅇ'), "⠨⠻"},
+            {new HangulMask('ㅉ', 'ㅓ', 'ㅇ'), "⠠⠨⠻"},
+            {new HangulMask('ㅊ', 'ㅓ', 'ㅇ'), "⠰⠻"},
+        };
+
+        private static readonly Dictionary<HangulMask, string> AbbreviationsWithoutOnset = new Dictionary<HangulMask, string>()
+        {
+            // 제15항. 글자 속에 모음으로 시작하는 약자가 포함되어 있을 때에는 해당 약자를 이용하여 적는다
+            // 억 언 얼 연 열 영 옥 온 옹 운 울 은 을 인
+            {new HangulMask(default, 'ㅓ', 'ㄱ'), "⠹" },
+            {new HangulMask(default, 'ㅓ', 'ㄴ'), "⠾" },
+            {new HangulMask(default, 'ㅓ', 'ㄹ'), "⠞" },
+            {new HangulMask(default, 'ㅕ', 'ㄴ'), "⠡" },
+            {new HangulMask(default, 'ㅕ', 'ㄹ'), "⠳" },
+            {new HangulMask(default, 'ㅕ', 'ㅇ'), "⠻" },
+            {new HangulMask(default, 'ㅗ', 'ㄱ'), "⠭" },
+            {new HangulMask(default, 'ㅗ', 'ㄴ'), "⠷" },
+            {new HangulMask(default, 'ㅗ', 'ㅇ'), "⠿" },
+            {new HangulMask(default, 'ㅜ', 'ㄴ'), "⠛" },
+            {new HangulMask(default, 'ㅜ', 'ㄹ'), "⠯" },
+            {new HangulMask(default, 'ㅡ', 'ㄴ'), "⠵" },
+            {new HangulMask(default, 'ㅡ', 'ㄹ'), "⠮" },
+            {new HangulMask(default, 'ㅣ', 'ㄴ'), "⠟" },
+        };
 
         public HangulBraille(char hangulCharacter)
         {
@@ -109,6 +159,7 @@ namespace Jumjaize
             _onset = syllables[0];
             _nucleus = syllables[1];
             _coda = syllables[2];
+            _letter = hangulCharacter;
         }
 
         public HangulBraille(char onset = default, char nucleus = default, char coda = default)
@@ -116,27 +167,103 @@ namespace Jumjaize
             _onset = onset;
             _nucleus = nucleus;
             _coda = coda;
+            _letter = new Hangul().JoinSyllables(onset, nucleus, coda);
+        }
+
+        private static string ConvertNucleusAndCoda(char nucleus = default, char coda = default)
+        {
+            // 제12항에 제시된 약자 ‘가, 나, 다, 마, 바, 사, 자, 카, 타, 파, 하’에 받침 글자가 오더라도 해당 약자를 사용하여 적는다.
+
+            HangulMask processedAbbr = null;
+            var sb = new StringBuilder();
+
+            // 최적화 여지가 있을듯
+            foreach(var abbr in AbbreviationsWithoutOnset)
+            {
+                if (abbr.Key.IsMatch(default(char), nucleus, coda))
+                {
+                    sb.Append(abbr.Value);
+                    processedAbbr = abbr.Key;
+                    break;
+                }
+            }
+
+            var syllables = new[] { default(char), nucleus, coda };
+            if (processedAbbr != null)
+            {
+                // 약어가 처리되었을 경우, 약어를 처리하고 남은 음절을 구한다
+                syllables = processedAbbr.SubtractIfMatched(default(char), nucleus, coda);
+            }
+
+            // 남아있는 음절을 마저 처리함
+
+            if (syllables[1] != default(char)) // has Nucleus
+            {
+                sb.Append(Nucleuses[new Hangul().FindIndexOfNucleus(syllables[1])]);
+            }
+
+            if(syllables[2] != default(char)) // has Coda
+            {
+                sb.Append(ConvertCoda(syllables[2]));
+            }
+
+            return sb.ToString();
+        }
+
+        private static string ConvertCoda(char coda)
+        {
+            if (coda != default(char))
+            {
+                return Codas[new Hangul().FindIndexOfCoda(coda)];
+            }
+
+            return string.Empty;
         }
 
         public override string ToString()
         {
             var hangul = new Hangul();
+
             var sb = new StringBuilder();
-            if (_onset != default(char))
+
+            // 제12항에 제시된 약자 ‘가, 나, 다, 마, 바, 사, 자, 카, 타, 파, 하’에 받침 글자가 오더라도 해당 약자를 사용하여 적는다.
+
+            HangulMask processedAbbr = null;
+            foreach(var abbr in Abbreviations)
             {
-                // 점자에서는 음가 없는 첫소리 ‘ㅇ’을 표기하지 않고, 이것을 약자가 아니라 정자로 삼는다.
-                if (_onset != 'ㅇ')
+                if (abbr.Key & _letter)
                 {
-                    sb.Append(Onsets[hangul.FindIndexOfOnset(_onset)]);
+                    sb.Append(abbr.Value);
+                    processedAbbr = abbr.Key;
+                    break;
                 }
             }
-            if (_nucleus != default(char))
+
+            if(processedAbbr == null)
             {
-                sb.Append(Nucleuses[hangul.FindIndexOfNucleus(_nucleus)]);
+                if (_onset != default(char))
+                {
+                    // 점자에서는 음가 없는 첫소리 ‘ㅇ’을 표기하지 않고, 이것을 약자가 아니라 정자로 삼는다.
+                    if (_onset != 'ㅇ')
+                    {
+                        sb.Append(Onsets[hangul.FindIndexOfOnset(_onset)]);
+                    }
+                }
             }
-            if (_coda != default(char))
+
+            char[] syllables = new[] { _onset, _nucleus, _coda };
+            if (processedAbbr != null)
             {
-                sb.Append(Codas[hangul.FindIndexOfCoda(_coda)]);
+                syllables = processedAbbr.SubtractIfMatched(_letter);
+            }
+
+            if(syllables[1] != default(char)) // has Nucleus
+            {
+                sb.Append(ConvertNucleusAndCoda(syllables[1], syllables[2]));
+            }
+            else
+            {
+                sb.Append(ConvertCoda(syllables[2]));
             }
 
             return sb.ToString();
