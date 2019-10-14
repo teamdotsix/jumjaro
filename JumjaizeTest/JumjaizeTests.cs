@@ -287,6 +287,10 @@ namespace JumjaizeTest
 
         [TestCase("다예", "i-/")]
         [TestCase("나예림", "c-/\"o5")]
+
+        // 외래어 표기 또는 중세 국어에서 사용되는 ‘셩, 졍, 쳥’ 등은 해당 첫소리 글자와 모음 ‘ㅕ’, 받침 ‘ㅇ’을 사용하여 어울러 적는다.
+        [TestCase("레이셩", "\"no,:7")]
+        [TestCase("졍", ".:7")]
         public void AbbreviationRuleTest(string testStr, string expectedBrailleASCII)
         {
             ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
