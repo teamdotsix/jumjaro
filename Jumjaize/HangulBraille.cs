@@ -123,6 +123,13 @@ namespace Jumjaize
             {new HangulMask('ㄲ', 'ㅏ'), "⠠⠫"},
             {new HangulMask('ㅆ', 'ㅏ'), "⠠⠇"},
             {new HangulMask('ㄲ', 'ㅓ', 'ㅅ'), "⠠⠸⠎"},
+
+            // 제16항:‘성, 썽, 정, 쩡, 청’은 ‘ㅅ, ㅆ, ㅈ, ㅉ, ㅊ’ 다음에 ‘ㅕㅇ’의 약자(1-2-4-5-6)를 적어 나타낸다
+            {new HangulMask('ㅅ', 'ㅓ', 'ㅇ'), "⠠⠻"},
+            {new HangulMask('ㅆ', 'ㅓ', 'ㅇ'), "⠠⠠⠻"},
+            {new HangulMask('ㅈ', 'ㅓ', 'ㅇ'), "⠨⠻"},
+            {new HangulMask('ㅉ', 'ㅓ', 'ㅇ'), "⠠⠨⠻"},
+            {new HangulMask('ㅊ', 'ㅓ', 'ㅇ'), "⠰⠻"},
         };
 
         private static readonly Dictionary<HangulMask, string> AbbreviationsWithoutOnset = new Dictionary<HangulMask, string>()

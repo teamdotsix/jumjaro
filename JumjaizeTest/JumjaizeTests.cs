@@ -269,6 +269,7 @@ namespace JumjaizeTest
         [TestCase("그늘", "@[c!")]
         [TestCase("진격", ".q@:a")]
 
+        // 제16항:‘성, 썽, 정, 쩡, 청’은 ‘ㅅ, ㅆ, ㅈ, ㅉ, ㅊ’ 다음에 ‘ㅕㅇ’의 약자(1-2-4-5-6)를 적어 나타낸다
         [TestCase("성가", ",]$")]
         [TestCase("말썽", "e1,,]")]
         [TestCase("정성", ".],]")]
