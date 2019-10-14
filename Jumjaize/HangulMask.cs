@@ -10,9 +10,6 @@ namespace Jumjaize
         private readonly char _nucleus;
         private readonly char _coda;
 
-        public bool HasOnset => _onset != default(char);
-        public bool HasNucleus=> _onset != default(char);
-        public bool HasCoda => _onset != default(char);
         private static readonly Dictionary<char, char[]> _doubleCodaMap = new Dictionary<char, char[]>()
         {
             {'ㄲ', new[] {'ㄱ', 'ㄱ'}},
