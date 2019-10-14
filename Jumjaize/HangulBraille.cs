@@ -118,6 +118,11 @@ namespace Jumjaize
             {new HangulMask('ㅍ', 'ㅏ'), "⠙"},
             {new HangulMask('ㅎ', 'ㅏ'), "⠚"},
             {new HangulMask('ㄱ', 'ㅓ', 'ㅅ'), "⠸⠎"},
+
+            // 제14항. ‘까, 싸, 껏’은 각각 ‘가, 사, 것’의 약자 표기에 된소리 표를 덧붙여 적는다.
+            {new HangulMask('ㄲ', 'ㅏ'), "⠠⠫"},
+            {new HangulMask('ㅆ', 'ㅏ'), "⠠⠇"},
+            {new HangulMask('ㄲ', 'ㅓ', 'ㅅ'), "⠠⠸⠎"},
         };
 
         private static readonly Dictionary<HangulMask, string> AbbreviationsWithoutOnset = new Dictionary<HangulMask, string>()
