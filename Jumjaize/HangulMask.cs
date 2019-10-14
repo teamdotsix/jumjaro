@@ -97,7 +97,49 @@ namespace Jumjaize
                 return codas;
             }
             return new [] {coda};
+        }
 
+        public char[] SubtractIfMatched(char onset, char nucleus, char coda)
+        {
+            if (IsMatch(onset, nucleus, coda))
+            {
+                // 약자가 처리되었을 경우에는 약자가 사용중인 음절만 없음(default(char))처리를 한다.
+                if (_onset != default(char))
+                {
+                    onset = default(char);
+                }
+                if (_nucleus != default(char))
+                {
+                    nucleus = default(char);
+                }
+                if (_coda != default(char))
+                {
+                    var codas = DissembleCoda(coda);
+                    if (codas.Length == 2)
+                    {
+                        coda = codas[1];
+                    }
+                    else
+                    {
+                        coda = default(char);
+                    }
+                }
+
+                return new[] { onset, nucleus, coda };
+            }
+
+            // 약자가 처리되지 않았을 경우에는 아무것도 하지 않는다.
+            return new[] { onset, nucleus, coda };
+        }
+
+        public char[] SubtractIfMatched(char hangulLetter)
+        {
+            var syllables = new Hangul().Syllabification(hangulLetter);
+            var onset = syllables[0];
+            var nucleus = syllables[1];
+            var coda = syllables[2];
+
+            return SubtractIfMatched(onset, nucleus, coda);
         }
 
     }

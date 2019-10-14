@@ -38,5 +38,17 @@ namespace JumjaizeTest
             Assert.AreEqual(false, new HangulMask(default, 'ㅚ', 'ㄴ') & '용');
             Assert.AreEqual(false, new HangulMask(default, 'ㅚ', 'ㄴ') & '됀');
         }
+
+        [TestCase(new[] { 'ㄱ', 'ㅏ', default(char) }, '간', new[] { default(char), default(char), 'ㄴ' })]
+        [TestCase(new[] { 'ㄱ', 'ㅏ', 'ㄴ' }, '간', new[] { default(char), default(char), default(char) })]
+        [TestCase(new[] { 'ㄱ', 'ㅏ', 'ㄴ' }, '박', new[] { 'ㅂ', 'ㅏ', 'ㄱ' })]
+        [TestCase(new[] { default(char), 'ㅏ', 'ㄴ' }, '박', new[] { 'ㅂ', 'ㅏ', 'ㄱ' })]
+        [TestCase(new[] { default(char), 'ㅏ', 'ㄴ' }, '반', new[] { 'ㅂ', default(char), default(char)})]
+        [TestCase(new[] { default(char), 'ㅏ', 'ㄹ' }, '갉', new[] { 'ㄱ', default(char), 'ㄱ'})]
+        public void SubtractIfMatchedTests(char[] maskSyllables, char testLetter, char[] expectedResult)
+        {
+            var actual = new HangulMask(maskSyllables[0], maskSyllables[1], maskSyllables[2]).SubtractIfMatched(testLetter);
+            Assert.AreEqual(expectedResult, actual);
+        }
     }
 }
