@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace Jumjaro
@@ -30,15 +32,63 @@ namespace Jumjaro
     public class Braille
     {
         private readonly string _braille;
+        /// <summary>
+        /// 점자 인덱스를 따라서 1부터 인덱스가 시작함 
+        /// </summary>
+        public ReadOnlyCollection<bool> Dot;
 
         public Braille(int index)
         {
             _braille = char.ConvertFromUtf32(0x2800 + index);
+            if (IsKoreanBraille(_braille[0]) == false)
+            {
+                throw new ArgumentException("한글 점자 영역이 아닙니다");
+            }
+
+            ParseDot();
         }
 
         public Braille(char unicodeBraille)
         {
+            if (IsKoreanBraille(unicodeBraille) == false)
+            {
+                throw new ArgumentException("한글 점자 영역이 아닙니다");
+            }
+
             _braille = unicodeBraille.ToString();
+            ParseDot();
+        }
+
+        private void ParseDot()
+        {
+            var index = (int)(_braille[0] - 0x2800);
+
+            var dotList = new List<bool>();
+            // 0번째 인덱스를 임의로 추가함. 점자 index는 1부터 시작한다.
+            dotList.Add(false);
+            var flag = 1;
+            var pos = 1;
+            do
+            {
+                if ((index & flag) > 0)
+                {
+                    dotList.Add(true);
+                }
+                else
+                {
+                    dotList.Add(false);
+                }
+
+                flag = flag << 1;
+                pos++;
+            } while (pos <= 6);
+
+            Dot = dotList.AsReadOnly();
+        }
+
+        public static bool IsKoreanBraille(char unicodeBraille)
+        {
+            return 0x2800 <= unicodeBraille && unicodeBraille <= 0x283F;
         }
 
         public static Braille CreateFromIndexNotation(string indexNotation)
