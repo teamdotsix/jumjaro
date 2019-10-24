@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jumjaro", "Jumjaize\Jumjaro.csproj", "{B3807B30-BB6E-497D-A14F-0A57E3F8ADE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jumjaro", "Jumjaro\Jumjaro.csproj", "{B3807B30-BB6E-497D-A14F-0A57E3F8ADE2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JumjaroTest", "JumjaizeTest\JumjaroTest.csproj", "{67DC547B-8BE4-4FD6-886C-4FF036A8A58E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JumjaroTest", "JumjaroTest\JumjaroTest.csproj", "{67DC547B-8BE4-4FD6-886C-4FF036A8A58E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JumjaroWeb", "JumjaizeWeb\JumjaroWeb.csproj", "{FB3FA4FF-D27C-4955-90FD-A449F06B8C6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JumjaroWeb", "JumjaroWeb\JumjaroWeb.csproj", "{FB3FA4FF-D27C-4955-90FD-A449F06B8C6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
