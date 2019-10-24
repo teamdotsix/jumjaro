@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jumjaize
+namespace Jumjaro
 {
     public class NumberArithmeticBraille
     {
