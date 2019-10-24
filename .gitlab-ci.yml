@@ -1,7 +1,7 @@
-image: mcr.microsoft.com/dotnet/core/sdk:3.0
+image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 before_script:
-  - dotnet new -i "Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview9.19465.2"
+  - dotnet new -i "Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview1.19508.20"
 
 pages:
   script:
