@@ -5,11 +5,11 @@ before_script:
 
 pages:
   script:
-    - pushd JumjaizeWeb
+    - pushd JumjaroWeb
     - dotnet publish -c Release -o ../publish
     - popd
-    - mv publish/JumjaizeWeb/dist public
-    - cp JumjaizeWeb/wwwroot/index_for_pages.html public/index.html
+    - mv publish/JumjaroWeb/dist public
+    - cp JumjaroWeb/wwwroot/index_for_pages.html public/index.html
   artifacts:
     paths:
       - public
