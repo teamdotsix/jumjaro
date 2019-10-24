@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using Jumjaize;
+using Jumjaro;
 
-namespace JumjaizeTest
+namespace JumjaroTest
 {
     class HangulMaskTests
     {

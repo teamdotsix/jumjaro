@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace JumjaizeWeb
+namespace JumjaroWeb
 {
     public class Program
     {

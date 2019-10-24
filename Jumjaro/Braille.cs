@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 
-namespace Jumjaize
+namespace Jumjaro
 {
     /*
      * 점자의 번호:

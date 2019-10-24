@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jumjaize
+namespace Jumjaro
 {
     public class Hangul
     {

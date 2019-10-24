@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "JumjaizeWeb": {
+    "JumjaroWeb": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

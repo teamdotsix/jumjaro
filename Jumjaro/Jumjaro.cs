@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Jumjaize
+namespace Jumjaro
 {
 
-    public class Jumjaize
+    public class Jumjaro
     {
         private readonly Hangul _hangul = new Hangul();
         private CharacterMode _characterMode = CharacterMode.None;

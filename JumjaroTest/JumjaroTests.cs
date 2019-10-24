@@ -1,22 +1,22 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Jumjaize;
+using Jumjaro;
 
-namespace JumjaizeTest
+namespace JumjaroTest
 {
-    public class JumjaizeTests
+    public class JumjaroTests
     {
         [TestCase("한글 점자", "⠚⠒⠈⠮⠀⠨⠎⠢⠨")]
         public void ToJumja(string testStr, string expected)
         {
-            Assert.AreEqual(expected, new Jumjaize.Jumjaize().ToJumja(testStr));
+            Assert.AreEqual(expected, new Jumjaro.Jumjaro().ToJumja(testStr));
         }
 
         [TestCase("직", "4-6,1-3-5,1")]
         public void ToJumjaTestWithIndexNotaion(string testStr, string expectedIndexNotation)
         {
             string expected = string.Join(string.Empty, Braille.CreateBraillesFromMultipleIndexNotation(expectedIndexNotation).Select(x => x.ToString()));
-            string actual = new Jumjaize.Jumjaize().ToJumja(testStr);
+            string actual = new Jumjaro.Jumjaro().ToJumja(testStr);
             Assert.AreEqual(expected, actual);
         }
 
@@ -44,7 +44,7 @@ namespace JumjaizeTest
         public void ToJumjaTestWithBrailleASCII(string testStr, string expectedBrailleASCII)
         {
             string expected = string.Join(string.Empty, Braille.CreateBrailesFromBrailleASCIICode(expectedBrailleASCII).Select(x => x.ToString()));
-            string actual = new Jumjaize.Jumjaize().ToJumja(testStr);
+            string actual = new Jumjaro.Jumjaro().ToJumja(testStr);
             Assert.AreEqual(expected, actual);
         }
 
@@ -300,21 +300,21 @@ namespace JumjaizeTest
         [TestCase("그래서 그러면\n그러나", "⠁⠎ ⠁⠒\n⠁⠉")]
         public void WordSplitTest(string testStr, string expected)
         {
-            var actual = new Jumjaize.Jumjaize().ToJumja(testStr);
+            var actual = new Jumjaro.Jumjaro().ToJumja(testStr);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase(",,[@o", "⠠⠠⠪⠈⠕")]
         public void BrailleASCIItoBrailleUnicodeTest(string testStr, string expected)
         {
-            var actual = Jumjaize.BrailleASCII.ToUnicode(testStr);
+            var actual = Jumjaro.BrailleASCII.ToUnicode(testStr);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase("⠠⠠⠪⠈⠕", ",,[@O")]
         public void BrailleUnicodetoBrailleASCIITest(string testStr, string expected)
         {
-            var actual = Jumjaize.BrailleASCII.FromUnicode(testStr);
+            var actual = Jumjaro.BrailleASCII.FromUnicode(testStr);
             Assert.AreEqual(expected, actual);
         }
 
@@ -322,7 +322,7 @@ namespace JumjaizeTest
         [TestCase("아이", "⠛⠣⠛⠕")]
         public void ToJumjaWithoutRules(string testStr, string expected)
         {
-            Assert.AreEqual(expected, new Jumjaize.Jumjaize().ToJumjaWithoutRules(testStr));
+            Assert.AreEqual(expected, new Jumjaro.Jumjaro().ToJumjaWithoutRules(testStr));
         }
 
         // 아래 테스트는 "제5장 숫자 제11절 국어 문장 안의 숫자"에서 가져왔다

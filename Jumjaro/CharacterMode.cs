@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jumjaize
+namespace Jumjaro
 {
     enum CharacterMode
     {
