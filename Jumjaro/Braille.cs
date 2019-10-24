@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Text;
 
 namespace Jumjaro
@@ -25,7 +24,7 @@ namespace Jumjaro
      * 점자 코드는 기계적으로 계산이 가능하게 배치되어있다.
      * 점자 번호를 역순으로 나열해서 2진수로 계산하면 해당 점자 코드가 나온다.
      *
-     * 예) ⠓ (1-2-5)일 경우, 점자 유무로 표기하면 "1 1 0 0 1 0 0 0"가 되고, 이를 역순 이진법으로 취하면 "00010011(19, 0x13)"이 된다. 
+     * 예) ⠓ (1-2-5)일 경우, 점자 유무로 표기하면 "1 1 0 0 1 0 0 0"가 되고, 이를 역순 이진법으로 취하면 "00010011(19, 0x13)"이 된다.
      *     그러므로 0x2800 + 0x13 = 0x2813, 즉 U+2813이 해당 점자의 유니코드가 된다.
      */
 
@@ -33,7 +32,7 @@ namespace Jumjaro
     {
         private readonly string _braille;
         /// <summary>
-        /// 점자 인덱스를 따라서 1부터 인덱스가 시작함 
+        /// 점자 인덱스를 따라서 1부터 인덱스가 시작함
         /// </summary>
         public ReadOnlyCollection<bool> Dot;
 
