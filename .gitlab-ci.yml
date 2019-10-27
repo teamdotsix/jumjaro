@@ -9,7 +9,6 @@ pages:
     - dotnet publish -c Release -o ../publish
     - popd
     - mv publish/JumjaroWeb/dist public
-    - cp JumjaroWeb/wwwroot/index_for_pages.html public/index.html
   artifacts:
     paths:
       - public
