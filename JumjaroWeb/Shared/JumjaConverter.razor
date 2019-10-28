@@ -1,17 +1,24 @@
-﻿<div class="container">
+﻿@using Jumjaro
+<div class="container">
     <div class="row">
-        <div class="col-sm">
-            <textarea class="form-control" rows="10" @bind="inputText"></textarea>
+        <div class="col-md-4 offset-md-8">
+            <button class="btn btn-primary w-100" @onclick="ConvertJumja">유니코드 변환</button>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md">
+            <fieldset>
+                <legend class="d-none d-md-block">한글 문자열</legend>
+                <textarea class="form-control" rows="10" @bind="inputText"></textarea>
+            </fieldset>
         </div>
         <div class="col-">
         </div>
-        <div class="col-sm">
+        <div class="col-md">
+            <fieldset>
+                <legend class="d-none d-md-block">점자 문자열</legend>
             <textarea class="form-control" rows="10" @bind="jumjaResult"></textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2">
-            <button class="btn btn-primary" @onclick="ConvertJumja">점자 변환</button>
+            </fieldset>
         </div>
     </div>
 </div>
@@ -24,7 +31,7 @@
     {
         await Task.Run(() =>
         {
-            var jumjaro = new Jumjaro.Jumjaro();
+            var jumjaro = new Jumjaro();
             jumjaResult = jumjaro.ToJumja(inputText);
         });
     }
