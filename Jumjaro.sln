@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JumjaroWebServer", "Jumjaro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JumjaroCLI", "JumjaroCLI\JumjaroCLI.csproj", "{49D65399-ED39-47F2-8769-0686BFC051CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JumjaroGUI", "JumjaroGUI\JumjaroGUI.csproj", "{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{49D65399-ED39-47F2-8769-0686BFC051CA}.Release|x64.Build.0 = Release|Any CPU
 		{49D65399-ED39-47F2-8769-0686BFC051CA}.Release|x86.ActiveCfg = Release|Any CPU
 		{49D65399-ED39-47F2-8769-0686BFC051CA}.Release|x86.Build.0 = Release|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Debug|x64.Build.0 = Debug|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Debug|x86.Build.0 = Debug|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Release|x64.ActiveCfg = Release|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Release|x64.Build.0 = Release|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{79B28C20-0515-47B0-8A0E-E8FE6C4417A4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
