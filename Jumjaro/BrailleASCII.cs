@@ -8,12 +8,12 @@ namespace Jumjaro
     public static class BrailleASCII
     {
         // NOTE: Braille ASCII Code (also known as SimBraille)
-        private static readonly string _brailleASCII = " A1B'K2L@CIF/MSP\"E3H9O6R^DJG>NTQ,*5<-U8V.%[$+X!&;:4\\0Z7(_?W]#Y)=";
+        private static readonly string _brailleASCII = " a1b'k2l@cif/msp\"e3h9o6r^djg>ntq,*5<-u8v.%[$+x!&;:4\\0z7(_?w]#y)=";
         private static readonly string _brailleASCIItoUnicode = "⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿";
 
         public static string ToUnicode(string brailleASCII)
         {
-            brailleASCII = brailleASCII.ToUpper();
+            brailleASCII = brailleASCII.ToLower();
             return new string(brailleASCII.Select(x => _brailleASCIItoUnicode[_brailleASCII.IndexOf(x)]).ToArray());
         }
 

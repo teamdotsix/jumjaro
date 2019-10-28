@@ -311,7 +311,7 @@ namespace JumjaroTest
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase("⠠⠠⠪⠈⠕", ",,[@O")]
+        [TestCase("⠠⠠⠪⠈⠕", ",,[@o")]
         public void BrailleUnicodetoBrailleASCIITest(string testStr, string expected)
         {
             var actual = Jumjaro.BrailleASCII.FromUnicode(testStr);
