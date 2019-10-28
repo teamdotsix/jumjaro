@@ -5,6 +5,11 @@
             <button class="btn btn-primary w-100" @onclick="ConvertJumja">유니코드 변환</button>
         </div>
     </div>
+    <div class="row mt-1">
+        <div class="col-md-4 offset-md-8">
+            <button class="btn btn-primary w-100" @onclick="ConvertBRF">BRF 변환</button>
+        </div>
+    </div>
     <div class="row mt-2">
         <div class="col-md">
             <fieldset>
@@ -33,6 +38,15 @@
         {
             var jumjaro = new Jumjaro();
             jumjaResult = jumjaro.ToJumja(inputText);
+        });
+    }
+
+    private async Task ConvertBRF(MouseEventArgs e)
+    {
+        await Task.Run(() =>
+        {
+            var jumjaro = new Jumjaro();
+            jumjaResult = BrailleASCII.FromUnicode(jumjaro.ToJumja(inputText));
         });
     }
 }
