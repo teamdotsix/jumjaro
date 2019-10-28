@@ -1,0 +1,31 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <textarea class="form-control" rows="10" @bind="inputText"></textarea>
+        </div>
+        <div class="col-">
+        </div>
+        <div class="col-sm">
+            <textarea class="form-control" rows="10" @bind="jumjaResult"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <button class="btn btn-primary" @onclick="ConvertJumja">점자 변환</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string inputText = "한글\n아이\n우유\n어머니\n아버지";
+    private string jumjaResult;
+
+    private async Task ConvertJumja(MouseEventArgs e)
+    {
+        await Task.Run(() =>
+        {
+            var jumjaro = new Jumjaro.Jumjaro();
+            jumjaResult = jumjaro.ToJumja(inputText);
+        });
+    }
+}
