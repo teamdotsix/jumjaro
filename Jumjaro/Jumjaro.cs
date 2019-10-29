@@ -101,7 +101,7 @@ namespace Jumjaro
                 }
                 words.Add(ConvertAsWord(word));
             }
-            return string.Join(" ", words);
+            return string.Join("⠀", words);
         }
 
         /// <summary>
