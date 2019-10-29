@@ -304,20 +304,6 @@ namespace JumjaroTest
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(",,[@o", "⠠⠠⠪⠈⠕")]
-        public void BrailleASCIItoBrailleUnicodeTest(string testStr, string expected)
-        {
-            var actual = Jumjaro.BrailleASCII.ToUnicode(testStr);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase("⠠⠠⠪⠈⠕", ",,[@o")]
-        public void BrailleUnicodetoBrailleASCIITest(string testStr, string expected)
-        {
-            var actual = Jumjaro.BrailleASCII.FromUnicode(testStr);
-            Assert.AreEqual(expected, actual);
-        }
-
         [TestCase("한글 점자", "⠚⠣⠒⠈⠪⠂ ⠨⠎⠢⠨⠣")]
         [TestCase("아이", "⠛⠣⠛⠕")]
         public void ToJumjaWithoutRules(string testStr, string expected)
