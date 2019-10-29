@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Jumjaro
 {
-    public class HangulMask
+    public class HangulAbbrMask
     {
         private readonly char _onset;
         private readonly char _nucleus;
@@ -26,16 +26,16 @@ namespace Jumjaro
             {'ㅄ', new[] {'ㅂ', 'ㅅ'}},
         };
 
-        public HangulMask(char onset = default, char nucleus = default, char coda = default)
+        public HangulAbbrMask(char onset = default, char nucleus = default, char coda = default)
         {
             _onset = onset;
             _nucleus = nucleus;
             _coda = coda;
         }
 
-        public static bool operator &(HangulMask mask, char hangul)
+        public static bool operator &(HangulAbbrMask abbrMask, char hangul)
         {
-            return mask.IsMatch(hangul);
+            return abbrMask.IsMatch(hangul);
         }
 
         public bool IsMatch(char hangulLetter)

@@ -103,53 +103,53 @@ namespace Jumjaro
         private readonly char _nucleus;
         private readonly char _coda;
 
-        private static readonly Dictionary<HangulMask, string> Abbreviations = new Dictionary<HangulMask, string>()
+        private static readonly Dictionary<HangulAbbrMask, string> Abbreviations = new Dictionary<HangulAbbrMask, string>()
         {
             // 제12항. 다음 글자가 포함된 글자들은 아래 표에 제시한 약자 표기를 이용하여 적는 것을 표준으로 삼는다.
-            {new HangulMask('ㄱ', 'ㅏ'), "⠫"},
-            {new HangulMask('ㄴ', 'ㅏ'), "⠉"},
-            {new HangulMask('ㄷ', 'ㅏ'), "⠊"},
-            {new HangulMask('ㅁ', 'ㅏ'), "⠑"},
-            {new HangulMask('ㅂ', 'ㅏ'), "⠘"},
-            {new HangulMask('ㅅ', 'ㅏ'), "⠇"},
-            {new HangulMask('ㅈ', 'ㅏ'), "⠨"},
-            {new HangulMask('ㅋ', 'ㅏ'), "⠋"},
-            {new HangulMask('ㅌ', 'ㅏ'), "⠓"},
-            {new HangulMask('ㅍ', 'ㅏ'), "⠙"},
-            {new HangulMask('ㅎ', 'ㅏ'), "⠚"},
-            {new HangulMask('ㄱ', 'ㅓ', 'ㅅ'), "⠸⠎"},
+            {new HangulAbbrMask('ㄱ', 'ㅏ'), "⠫"},
+            {new HangulAbbrMask('ㄴ', 'ㅏ'), "⠉"},
+            {new HangulAbbrMask('ㄷ', 'ㅏ'), "⠊"},
+            {new HangulAbbrMask('ㅁ', 'ㅏ'), "⠑"},
+            {new HangulAbbrMask('ㅂ', 'ㅏ'), "⠘"},
+            {new HangulAbbrMask('ㅅ', 'ㅏ'), "⠇"},
+            {new HangulAbbrMask('ㅈ', 'ㅏ'), "⠨"},
+            {new HangulAbbrMask('ㅋ', 'ㅏ'), "⠋"},
+            {new HangulAbbrMask('ㅌ', 'ㅏ'), "⠓"},
+            {new HangulAbbrMask('ㅍ', 'ㅏ'), "⠙"},
+            {new HangulAbbrMask('ㅎ', 'ㅏ'), "⠚"},
+            {new HangulAbbrMask('ㄱ', 'ㅓ', 'ㅅ'), "⠸⠎"},
 
             // 제14항. ‘까, 싸, 껏’은 각각 ‘가, 사, 것’의 약자 표기에 된소리 표를 덧붙여 적는다.
-            {new HangulMask('ㄲ', 'ㅏ'), "⠠⠫"},
-            {new HangulMask('ㅆ', 'ㅏ'), "⠠⠇"},
-            {new HangulMask('ㄲ', 'ㅓ', 'ㅅ'), "⠠⠸⠎"},
+            {new HangulAbbrMask('ㄲ', 'ㅏ'), "⠠⠫"},
+            {new HangulAbbrMask('ㅆ', 'ㅏ'), "⠠⠇"},
+            {new HangulAbbrMask('ㄲ', 'ㅓ', 'ㅅ'), "⠠⠸⠎"},
 
             // 제16항:‘성, 썽, 정, 쩡, 청’은 ‘ㅅ, ㅆ, ㅈ, ㅉ, ㅊ’ 다음에 ‘ㅕㅇ’의 약자(1-2-4-5-6)를 적어 나타낸다
-            {new HangulMask('ㅅ', 'ㅓ', 'ㅇ'), "⠠⠻"},
-            {new HangulMask('ㅆ', 'ㅓ', 'ㅇ'), "⠠⠠⠻"},
-            {new HangulMask('ㅈ', 'ㅓ', 'ㅇ'), "⠨⠻"},
-            {new HangulMask('ㅉ', 'ㅓ', 'ㅇ'), "⠠⠨⠻"},
-            {new HangulMask('ㅊ', 'ㅓ', 'ㅇ'), "⠰⠻"},
+            {new HangulAbbrMask('ㅅ', 'ㅓ', 'ㅇ'), "⠠⠻"},
+            {new HangulAbbrMask('ㅆ', 'ㅓ', 'ㅇ'), "⠠⠠⠻"},
+            {new HangulAbbrMask('ㅈ', 'ㅓ', 'ㅇ'), "⠨⠻"},
+            {new HangulAbbrMask('ㅉ', 'ㅓ', 'ㅇ'), "⠠⠨⠻"},
+            {new HangulAbbrMask('ㅊ', 'ㅓ', 'ㅇ'), "⠰⠻"},
         };
 
-        private static readonly Dictionary<HangulMask, string> AbbreviationsWithoutOnset = new Dictionary<HangulMask, string>()
+        private static readonly Dictionary<HangulAbbrMask, string> AbbreviationsWithoutOnset = new Dictionary<HangulAbbrMask, string>()
         {
             // 제15항. 글자 속에 모음으로 시작하는 약자가 포함되어 있을 때에는 해당 약자를 이용하여 적는다
             // 억 언 얼 연 열 영 옥 온 옹 운 울 은 을 인
-            {new HangulMask(default, 'ㅓ', 'ㄱ'), "⠹" },
-            {new HangulMask(default, 'ㅓ', 'ㄴ'), "⠾" },
-            {new HangulMask(default, 'ㅓ', 'ㄹ'), "⠞" },
-            {new HangulMask(default, 'ㅕ', 'ㄴ'), "⠡" },
-            {new HangulMask(default, 'ㅕ', 'ㄹ'), "⠳" },
-            {new HangulMask(default, 'ㅕ', 'ㅇ'), "⠻" },
-            {new HangulMask(default, 'ㅗ', 'ㄱ'), "⠭" },
-            {new HangulMask(default, 'ㅗ', 'ㄴ'), "⠷" },
-            {new HangulMask(default, 'ㅗ', 'ㅇ'), "⠿" },
-            {new HangulMask(default, 'ㅜ', 'ㄴ'), "⠛" },
-            {new HangulMask(default, 'ㅜ', 'ㄹ'), "⠯" },
-            {new HangulMask(default, 'ㅡ', 'ㄴ'), "⠵" },
-            {new HangulMask(default, 'ㅡ', 'ㄹ'), "⠮" },
-            {new HangulMask(default, 'ㅣ', 'ㄴ'), "⠟" },
+            {new HangulAbbrMask(default, 'ㅓ', 'ㄱ'), "⠹" },
+            {new HangulAbbrMask(default, 'ㅓ', 'ㄴ'), "⠾" },
+            {new HangulAbbrMask(default, 'ㅓ', 'ㄹ'), "⠞" },
+            {new HangulAbbrMask(default, 'ㅕ', 'ㄴ'), "⠡" },
+            {new HangulAbbrMask(default, 'ㅕ', 'ㄹ'), "⠳" },
+            {new HangulAbbrMask(default, 'ㅕ', 'ㅇ'), "⠻" },
+            {new HangulAbbrMask(default, 'ㅗ', 'ㄱ'), "⠭" },
+            {new HangulAbbrMask(default, 'ㅗ', 'ㄴ'), "⠷" },
+            {new HangulAbbrMask(default, 'ㅗ', 'ㅇ'), "⠿" },
+            {new HangulAbbrMask(default, 'ㅜ', 'ㄴ'), "⠛" },
+            {new HangulAbbrMask(default, 'ㅜ', 'ㄹ'), "⠯" },
+            {new HangulAbbrMask(default, 'ㅡ', 'ㄴ'), "⠵" },
+            {new HangulAbbrMask(default, 'ㅡ', 'ㄹ'), "⠮" },
+            {new HangulAbbrMask(default, 'ㅣ', 'ㄴ'), "⠟" },
         };
 
         public HangulBraille(char hangulCharacter)
@@ -174,7 +174,7 @@ namespace Jumjaro
         {
             // 제12항에 제시된 약자 ‘가, 나, 다, 마, 바, 사, 자, 카, 타, 파, 하’에 받침 글자가 오더라도 해당 약자를 사용하여 적는다.
 
-            HangulMask processedAbbr = null;
+            HangulAbbrMask processedAbbr = null;
             var sb = new StringBuilder();
 
             // 최적화 여지가 있을듯
@@ -228,7 +228,7 @@ namespace Jumjaro
 
             // 제12항에 제시된 약자 ‘가, 나, 다, 마, 바, 사, 자, 카, 타, 파, 하’에 받침 글자가 오더라도 해당 약자를 사용하여 적는다.
 
-            HangulMask processedAbbr = null;
+            HangulAbbrMask processedAbbr = null;
             foreach(var abbr in Abbreviations)
             {
                 if (abbr.Key & _letter)
