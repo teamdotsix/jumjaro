@@ -40,7 +40,8 @@ namespace JumjaroTest
             ToJumjaTestWithIndexNotaion(testStr, expectedIndexNotation);
         }
 
-        [TestCase("직", ".OA")]
+        [TestCase("직", ".oa")]
+        [TestCase("매년 11월 4일은 ‘점자의 날’이다. 송암 박두성 선생이 한글 점자인 ‘훈맹정음’을 세상에 내놓은 1926년 11월 4일을 기념하는 날이다.", "erc* #aap1 #do1z ,8.s5.<w c10'oi4 ,=<5 ~aim,} ,),r7o j3@! .s5.<q,8jger7.}{50'! ,nl7n crcu0z #aibf c* #aap1 #do1! @oc:5jcz c1oi4")]
         public void ToJumjaTestWithBrailleASCII(string testStr, string expectedBrailleASCII)
         {
             string expected = string.Join(string.Empty, Braille.CreateBrailesFromBrailleASCIICode(expectedBrailleASCII).Select(x => x.ToString()));
