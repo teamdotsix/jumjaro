@@ -134,7 +134,7 @@ table {
 }
 
 body {
-    font-family: 'Spoqa Han Sans', Helvetica, Arial, serif;
+    font-family: 'Spoqa Han Sans', '맑은 고딕', sans-serif;
     font-size: 1.2em;
     line-height: 1.5;
     background: #eee;
@@ -155,7 +155,7 @@ header {
 }
 
 header h1 {
-    font-family: 'Spoqa Han Sans', 'Helvetica Neue', Helvetica, Arial, serif;
+    font-family: 'Spoqa Han Sans', '맑은 고딕', sans-serif;
     font-size: 3rem;
     font-weight: 900;
     line-height: 1.2;
