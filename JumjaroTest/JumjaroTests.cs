@@ -297,7 +297,7 @@ namespace JumjaroTest
         }
 
         [TestCase("그래서\n그러나", "⠁⠎\n⠁⠉")]
-        [TestCase("그래서 그러면\n그러나", "⠁⠎ ⠁⠒\n⠁⠉")]
+        [TestCase("그래서 그러면\n그러나", "⠁⠎⠀⠁⠒\n⠁⠉")]
         public void WordSplitTest(string testStr, string expected)
         {
             var actual = new Jumjaro.Jumjaro().ToJumja(testStr);
