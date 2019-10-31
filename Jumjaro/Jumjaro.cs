@@ -10,6 +10,7 @@ namespace Jumjaro
     {
         private readonly Hangul _hangul = new Hangul();
         private CharacterMode _characterMode = CharacterMode.None;
+        private static char[] _rule17startChars = new []{'나', '다', '마', '바', '자', '카', '타', '파', '하', '따', '빠', '짜'};
 
         private readonly Dictionary<string, string> _acronyms = new Dictionary<string, string>()
         {
@@ -42,11 +43,30 @@ namespace Jumjaro
         private string ConvertAsChar(string str)
         {
             StringBuilder sb = new StringBuilder();
-            foreach (var ch in str)
+
+            for (int i = 0; i < str.Length; ++i)
             {
+                var ch = str[i];
+
                 if (_hangul.IsHangulCharacter(ch))
                 {
                     ChangeMode(CharacterMode.Hangul, sb);
+
+                    // 제17항. 한 단어 안에서 ‘나, 다, 마, 바, 자, 카, 타, 파, 하’ 뒤에 모음이 이어 나올 때에는 ‘ㅏ’를 생략하지 않고 적는다.
+                    if (_rule17startChars.Contains(ch) && (i + 1 < str.Length))
+                    {
+                        var nextChar = str[i + 1];
+                        if (_hangul.IsHangulCharacter(nextChar) && nextChar != '예')
+                        {
+                            var syllables = _hangul.Syllabification(nextChar, onset: true, false, false);
+                            if (syllables != null && syllables[0] == 'ㅇ')
+                            {
+                                sb.Append(new HangulBraille(ch).ToStringWithoutRules());
+                                continue;
+                            }
+                        }
+                    }
+
                     sb.Append(new HangulBraille(ch).ToString());
                 }
                 else if (char.IsNumber(ch))
