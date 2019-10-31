@@ -48,6 +48,9 @@ namespace Jumjaro
             {
                 var ch = str[i];
 
+                // TODO: 제10항. 모음자에 ‘예’가 이어 나올 때에는 그 사이에 붙임표(3-6)를 적어 나타낸다.
+                // TODO: 제11항. ‘ㅑ, ㅘ, ㅜ, ㅝ’에 ‘애’가 이어 나올 때에는 그 사이에 붙임표를 적어 나타낸다.
+
                 if (_hangul.IsHangulCharacter(ch))
                 {
                     ChangeMode(CharacterMode.Hangul, sb);

@@ -297,6 +297,18 @@ namespace JumjaroTest
             ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
         }
 
+        [TestCase("오예", "u-/")]
+        [TestCase("이예은", "o-/z")]
+        [TestCase("노예로 팔리다.", "cu-/\"u d1\"oi4")]
+        [TestCase("예예, 잘 알겠습니다.", "/-/\" .1 <1@n/,{bcoi4")]
+        [TestCase("아예", ">-r")]
+        [TestCase("소화액", ",ujv-ra")]
+        [TestCase("구애", "@m-r")]
+        public void NucleusChainRuleTest(string testStr, string expectedBrailleASCII)
+        {
+            ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
+        }
+
         [TestCase("그래서\n그러나", "⠁⠎\n⠁⠉")]
         [TestCase("그래서 그러면\n그러나", "⠁⠎⠀⠁⠒\n⠁⠉")]
         public void WordSplitTest(string testStr, string expected)
