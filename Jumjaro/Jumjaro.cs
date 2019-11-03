@@ -10,9 +10,10 @@ namespace Jumjaro
     {
         private readonly Hangul _hangul = new Hangul();
         private CharacterMode _characterMode = CharacterMode.None;
-        private static char[] _rule17startChars = new []{'나', '다', '마', '바', '자', '카', '타', '파', '하', '따', '빠', '짜'};
+        private static char[] _rule17startChars = { '나', '다', '마', '바', '자', '카', '타', '파', '하', '따', '빠', '짜' };
         private static char _attachemntMark = '⠤';  // 붙임표 (3-6)
-        private static char[] _rule10nucleuses = new[] {'ㅑ', 'ㅘ', 'ㅜ', 'ㅝ'};
+        private static char[] _rule10nucleuses = { 'ㅑ', 'ㅘ', 'ㅜ', 'ㅝ' };
+        private static char[] _mustSpacingOnsetsAfterNumber = { 'ㄴ', 'ㄷ', 'ㅁ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' };
 
         private readonly Dictionary<string, string> _acronyms = new Dictionary<string, string>()
         {
@@ -42,6 +43,14 @@ namespace Jumjaro
             }
         }
 
+        private void ResetNumberMode()
+        {
+            if (_characterMode == CharacterMode.Number)
+            {
+                _characterMode = CharacterMode.None;
+            }
+        }
+
         private string ConvertAsChar(string str)
         {
             StringBuilder sb = new StringBuilder();
@@ -50,9 +59,18 @@ namespace Jumjaro
             {
                 var ch = str[i];
 
-
                 if (_hangul.IsHangulCharacter(ch))
                 {
+                    // TODO: 글자 모드가 변경 될 때, 다음에 어떤 문자가 오는지에 따라 처리할 수 있는 인터페이스가 필요할 듯.
+                    if (_characterMode == CharacterMode.Number)
+                    {
+                        // ‘ㄴ, ㄷ, ㅁ, ㅋ, ㅌ, ㅍ, ㅎ’과 약자 ‘운’의 약자가 숫자 다음에 이어 나올 때에는 오독할 수 있으므로 띄어쓴다.
+                        var onset = _hangul.Syllabification(ch, true, false, false)[0];
+                        if (ch == '운' || _mustSpacingOnsetsAfterNumber.Contains(onset))
+                        {
+                            sb.Append("⠀");
+                        }
+                    }
                     ChangeMode(CharacterMode.Hangul, sb);
 
                     if ((i + 1 >= str.Length) || !_hangul.IsHangulCharacter(str[i + 1]))
@@ -135,6 +153,9 @@ namespace Jumjaro
             {
                 sb.Append(ConvertAsChar(str));
             }
+
+            // 수표는 공백이 오면 효력이 정지되므로, 숫자를 만났을 때 다시 수표를 지정할 수 있도록 모드를 초기화해 준다.
+            ResetNumberMode();
 
             return sb.ToString();
         }
