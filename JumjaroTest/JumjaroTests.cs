@@ -301,7 +301,7 @@ namespace JumjaroTest
         [TestCase("이예은", "o-/z")]
         [TestCase("노예로 팔리다.", "cu-/\"u d1\"oi4")]
         [TestCase("예예, 잘 알겠습니다.", "/-/\" .1 <1@n/,{bcoi4")]
-        [TestCase("아예", ">-r")]
+        [TestCase("아예", "<-/")]
         [TestCase("소화액", ",ujv-ra")]
         [TestCase("구애", "@m-r")]
         public void NucleusChainRuleTest(string testStr, string expectedBrailleASCII)
