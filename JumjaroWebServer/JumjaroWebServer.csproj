@@ -4,10 +4,6 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>JumjaroWebServer</AssemblyName>
     <RootNamespace>JumjaroWebServer</RootNamespace>
-    <Copyright>Copyright (c) 2019 Team DotSix All Rights Reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/teamdotsix/jumjaro</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/teamdotsix/jumjaro</RepositoryUrl>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,13 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jumjaro\Jumjaro.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\LICENSE.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>
