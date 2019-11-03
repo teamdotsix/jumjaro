@@ -135,7 +135,7 @@ table {
 
 body {
     font-family: 'Spoqa Han Sans', '맑은 고딕', sans-serif;
-    font-size: 1.2em;
+    font-size: 1rem;
     line-height: 1.5;
     background: #eee;
     word-break: keep-all;
@@ -313,16 +313,16 @@ h1 {
 
 h2 {
     margin-bottom: 8px;
-    font-size: 22px;
+    font-size: 1.4rem;
     font-weight: bold;
     color: #303030
 }
 
 h3 {
     margin-bottom: 8px;
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: #d5000d
+    color: #303030
 }
 
 h4 {
@@ -348,6 +348,7 @@ p {
 
 li {
     font-weight: 300;
+    font-size: 1rem;
 }
 
 a {
