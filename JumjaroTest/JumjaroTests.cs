@@ -363,6 +363,8 @@ namespace JumjaroTest
         [TestCase("7자루", "#g.\"m")]
         [TestCase("8꾸러미", "#h,@m\"seo")]
 
+        [TestCase("1평은 3.3㎡이다.", "#a d]z #c4c0m^#boi4")]
+
         //숫자와 혼동되는 ‘ㄴ, ㄷ, ㅁ, ㅋ, ㅌ, ㅍ, ㅎ’의 첫소리 글자와 ‘운’의 약자가 숫자 다음에 이어 나올 때에는 숫자와 한글을 띄어 쓴다.
         [TestCase("1년", "#a c*")]
         [TestCase("2도", "#b iu")]
@@ -372,6 +374,7 @@ namespace JumjaroTest
         [TestCase("6평", "#f d]")]
         [TestCase("7항", "#g j7")]
         [TestCase("5운6기", "#e g#f@o")]
+        [TestCase("79㎡형", "#gi0m^#b j]")]
         public void NumberWithStringRuleTest(string testStr, string expectedBrailleASCII)
         {
             ToJumjaTestWithBrailleASCII(testStr, expectedBrailleASCII);
