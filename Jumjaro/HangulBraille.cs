@@ -37,6 +37,13 @@ namespace Jumjaro
             "⠚",    // ㅎ
         };
 
+        private static readonly Dictionary<char, char> NoAbbrDoubleOnsetMap = new Dictionary<char, char>()
+        {
+            {'ㄸ', 'ㄷ'},
+            {'ㅃ', 'ㅂ'},
+            {'ㅉ', 'ㅈ'},
+        };
+
         private static readonly string[] Nucleuses =
         {
             /*
@@ -220,11 +227,38 @@ namespace Jumjaro
             return string.Empty;
         }
 
+        private bool hasSsangsiotCoda()
+        {
+            var coda = new Hangul().Syllabification(_letter, false, false, true)[2];
+            return coda == 'ㅆ';
+        }
+
         public override string ToString()
         {
             var hangul = new Hangul();
 
             var sb = new StringBuilder();
+
+            // 된소리 글자 중 약자 표기가 없는 ㄸ, ㅃ, ㅉ은 "된소리표 + 된소리 제거된 글자"로 취급하여 처리한다.
+            // 예) 땅 -> 된소리표 + 당
+            var onset = hangul.Syllabification(_letter, true, false, false)?[0] ?? default(char);
+            if (NoAbbrDoubleOnsetMap.ContainsKey(onset))
+            {
+                var nucleusAndCoda = hangul.Syllabification(_letter, false, true, true);
+                return '⠠' + new HangulBraille(NoAbbrDoubleOnsetMap[onset], nucleusAndCoda[1], nucleusAndCoda[2]).ToString();
+            }
+
+            // ‘껐’과 같이 받침 글자가 ‘ㅆ’일 경우에는 받침 ‘ㅅ’을 덧붙여 적는 것이 아니라 받침 ‘ㅆ’ 약자를 우선 적용하여 ‘꺼’와 ‘받침 ㅆ’으로 적는다.
+            if (hasSsangsiotCoda())
+            {
+                //‘팠’은 항상 ‘ㅏ’를 생략하지 않는다.
+                if (_letter == '팠')
+                {
+                    return new HangulBraille('파').ToStringWithoutRules() + '⠌';
+                }
+
+                return new HangulBraille(hangul.RemoveCoda(_letter)).ToString() + '⠌';
+            }
 
             // 제12항에 제시된 약자 ‘가, 나, 다, 마, 바, 사, 자, 카, 타, 파, 하’에 받침 글자가 오더라도 해당 약자를 사용하여 적는다.
 
