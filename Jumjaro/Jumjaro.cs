@@ -104,6 +104,10 @@ namespace Jumjaro
                     ChangeMode(CharacterMode.Number, sb);
                     sb.Append(new NumberArithmeticBraille(ch).ToString());
                 }
+                else if (PunctuationMarkBraille.IsPunctuationMark(ch))
+                {
+                    sb.Append(new PunctuationMarkBraille(ch));
+                }
                 else
                 {
                     sb.Append(ch);
