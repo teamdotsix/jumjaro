@@ -42,6 +42,28 @@ namespace Jumjaro
             return Array.FindIndex(_codas, c => c == ch);
         }
 
+        public bool HasCoda(char ch)
+        {
+            var syllables = Syllabification(ch, false, false, true);
+            if (syllables == null)
+            {
+                return false;
+            }
+
+            return syllables[2] != '\0';
+        }
+
+        public char RemoveCoda(char ch)
+        {
+            var syllables = Syllabification(ch, true, true, false);
+            if (syllables == null)
+            {
+                throw new ArgumentException($"{ch} is not a Hangul character.");
+            }
+
+            return JoinSyllables(syllables[0], syllables[1]);
+        }
+
         public char[] Syllabification(char letter, bool onset = true, bool nucleus = true, bool coda = true)
         {
             if (!IsHangulCharacter(letter))

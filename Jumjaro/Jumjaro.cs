@@ -11,6 +11,8 @@ namespace Jumjaro
         private readonly Hangul _hangul = new Hangul();
         private CharacterMode _characterMode = CharacterMode.None;
         private static char[] _rule17startChars = new []{'나', '다', '마', '바', '자', '카', '타', '파', '하', '따', '빠', '짜'};
+        private static char _attachemntMark = '⠤';  // 붙임표 (3-6)
+        private static char[] _rule10nucleuses = new[] {'ㅑ', 'ㅘ', 'ㅜ', 'ㅝ'};
 
         private readonly Dictionary<string, string> _acronyms = new Dictionary<string, string>()
         {
@@ -48,25 +50,50 @@ namespace Jumjaro
             {
                 var ch = str[i];
 
-                // TODO: 제10항. 모음자에 ‘예’가 이어 나올 때에는 그 사이에 붙임표(3-6)를 적어 나타낸다.
-                // TODO: 제11항. ‘ㅑ, ㅘ, ㅜ, ㅝ’에 ‘애’가 이어 나올 때에는 그 사이에 붙임표를 적어 나타낸다.
 
                 if (_hangul.IsHangulCharacter(ch))
                 {
                     ChangeMode(CharacterMode.Hangul, sb);
 
-                    // 제17항. 한 단어 안에서 ‘나, 다, 마, 바, 자, 카, 타, 파, 하’ 뒤에 모음이 이어 나올 때에는 ‘ㅏ’를 생략하지 않고 적는다.
-                    if (_rule17startChars.Contains(ch) && (i + 1 < str.Length))
+                    if ((i + 1 >= str.Length) || !_hangul.IsHangulCharacter(str[i + 1]))
                     {
-                        var nextChar = str[i + 1];
-                        if (_hangul.IsHangulCharacter(nextChar) && nextChar != '예')
+                        sb.Append(new HangulBraille(ch).ToString());
+                        continue;
+                    }
+
+                    // 다음 글자가 한글일 경우:
+
+                    var nextChar = str[i + 1];
+                    var nextCharWithoutCoda = _hangul.RemoveCoda(nextChar);
+
+                    // 제10항. 모음자에 ‘예’가 이어 나올 때에는 그 사이에 붙임표(3-6)를 적어 나타낸다.
+                    if (!_hangul.HasCoda(ch) && nextCharWithoutCoda == '예')
+                    {
+                        sb.Append(new HangulBraille(ch).ToString());
+                        sb.Append(_attachemntMark);
+                        continue;
+                    }
+
+                    // 제11항. ‘ㅑ, ㅘ, ㅜ, ㅝ’에 ‘애’가 이어 나올 때에는 그 사이에 붙임표를 적어 나타낸다.
+                    if (!_hangul.HasCoda(ch) && nextCharWithoutCoda == '애')
+                    {
+                        var syllables = _hangul.Syllabification(ch, onset: false, true, false);
+                        if (_rule10nucleuses.Contains(syllables[1]))
                         {
-                            var syllables = _hangul.Syllabification(nextChar, onset: true, false, false);
-                            if (syllables != null && syllables[0] == 'ㅇ')
-                            {
-                                sb.Append(new HangulBraille(ch).ToStringWithoutRules());
-                                continue;
-                            }
+                            sb.Append(new HangulBraille(ch).ToString());
+                            sb.Append(_attachemntMark);
+                            continue;
+                        }
+                    }
+
+                    // 제17항. 한 단어 안에서 ‘나, 다, 마, 바, 자, 카, 타, 파, 하’ 뒤에 모음이 이어 나올 때에는 ‘ㅏ’를 생략하지 않고 적는다.
+                    if (_rule17startChars.Contains(ch))
+                    {
+                        var syllables = _hangul.Syllabification(nextChar, onset: true, false, false);
+                        if (syllables != null && syllables[0] == 'ㅇ')
+                        {
+                            sb.Append(new HangulBraille(ch).ToStringWithoutRules());
+                            continue;
                         }
                     }
 
