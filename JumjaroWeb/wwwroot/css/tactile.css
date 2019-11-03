@@ -195,7 +195,7 @@ footer {
 
 @media only screen and (max-width: 767px) {
     header {
-        padding-top: 10px;
-        padding-bottom: 10px
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
     }
 }
