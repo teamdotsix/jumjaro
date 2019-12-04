@@ -16,9 +16,9 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@master
         with:
-          dotnet-version: 3.1.100-preview1-014459
+          dotnet-version: 3.1.100
       - name: Install Blazor Template
-        run: dotnet new -i "Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview1.19508.20"
+        run: dotnet new -i "Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview4.19579.2"
       - name: Build
         run: dotnet publish -c Release -o ../publish
         working-directory: ./JumjaroWeb
